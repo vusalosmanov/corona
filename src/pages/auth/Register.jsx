@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import RegisterImg from '../../assets/image/iconss/register.png'
-import { Link  , useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import 'react-toastify/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
-import { createUserWithEmailAndPassword} from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/config'
 import Loader from '../../components/loader/loader'
 const Register = () => {
@@ -16,28 +16,28 @@ const Register = () => {
   const navigate = useNavigate()
 
   const registerUser = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (password !== fpassword) {
-      toast.error("password yanlis")
+      toast.error("Passwords do not match.");
     }
-    setIsLoading(true)
+    setIsLoading(true);
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        setIsLoading(false)
-        toast.success("Register basarili")
-        navigate("/login")
+        toast.success("Registration Successful...");
+        setIsLoading(false);
+        navigate("/login");
       })
       .catch((error) => {
-        toast.error(error.message)
-        setIsLoading(false)
+        toast.error(error.message);
+        setIsLoading(false);
       });
-  }
+  };
   return (
     <>
-      <ToastContainer />
-      { isLoading &&  <Loader/>}
+      {isLoading && <Loader />}
       <section className='w-full h-auto'>
         <div className='max-[1320px] w-full mx-auto flex justify-center gap-[40px] items-center h-[600px]'>
           <form className="w-full flex justify-center items-center flex-col max-w-[450px]" onSubmit={registerUser}>
@@ -68,6 +68,7 @@ const Register = () => {
           </div>
         </div>
       </section>
+      <ToastContainer />
     </>
   )
 }

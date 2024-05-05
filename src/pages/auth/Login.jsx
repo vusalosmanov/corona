@@ -3,7 +3,7 @@ import LoginImg from '../../assets/image/iconss/login.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase/config';
-import { toast , ToastContainer  } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import Loader from '../../components/loader/loader'
 const Login = () => {
 
@@ -13,32 +13,31 @@ const Login = () => {
 
     const navigate = useNavigate()
 
-    const handleClick = (e) => {
-        e.preventDefault()
-        setIsLoading(true)
+
+    const loginUser = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const user = userCredential.user;
-                setIsLoading(false)
-                toast.success("Login basarili")
+                setIsLoading(false);
+                toast.success("Login Successful...");
                 navigate("/")
             })
             .catch((error) => {
-                setIsLoading(false)
-                toast.error(error.mesagge)
+                setIsLoading(false);
+                toast.error(error.message);
             });
-    }
+    };
 
     return (
         <>
-            <ToastContainer />
-            { isLoading &&  <Loader/>}
+            {isLoading && <Loader />}
             <section className='w-full h-auto'>
                 <div className='max-[1320px] w-full mx-auto flex justify-center gap-[40px] items-center h-[600px]'>
                     <div className='login w-[full]'>
                         <img src={LoginImg} alt="LoginImg" className='w-[400px] object-cover' />
                     </div>
-                    <form className="w-full flex justify-center items-center flex-col max-w-[450px]" onSubmit={handleClick}>
+                    <form className="w-full flex justify-center items-center flex-col max-w-[450px]" onSubmit={loginUser}>
                         <h2 className="lg:mb-[55px] relative text-center capitalize text-[2rem]">Daxil ol</h2>
                         <div className="w-[40px]  h-[5px] rounded-lg bg-[#106853] block lg:hidden mt-[10px]"></div>
                         <div className="flex flex-row gap-[20px] w-full mt-[40px] lg:mt-[0]">
@@ -62,6 +61,7 @@ const Login = () => {
                     </form>
                 </div>
             </section>
+            <ToastContainer />
         </>
     )
 }

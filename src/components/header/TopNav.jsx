@@ -1,6 +1,36 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { signOut } from 'firebase/auth'
+import { ToastContainer, toast } from 'react-toastify'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../../firebase/config'
 const TopNav = () => {
+
+    const [displayName, setdisplayName] = useState("")
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+                console.log(user.displayName);
+                setdisplayName(user.displayName)
+            } else {
+                setdisplayName("");
+            }
+        });
+    } , [])
+    const logoutUser = () => {
+        signOut(auth)
+            .then(() => {
+                toast.success("Logout successfully.");
+                navigate("/");
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
+
     return (
         <>
             <nav className='w-[100%]  relative bg-[#31363F]'>
@@ -18,6 +48,16 @@ const TopNav = () => {
                         >
                             My Orders
                         </Link>
+                        <a href="#">
+                            Hi, {displayName}
+                        </a>
+                        <Link
+                            to="/"
+                            className=" mr-[20px]  text-[#fff]  text-[16px] relative hover:text-white"
+                            onClick={logoutUser}
+                        >
+                            Hesabdan Cıxış
+                        </Link>
                         <Link
                             to="/login"
                             className="mr-[20px] text-[white]  text-[16px] relative hover:text-[#106853] "
@@ -33,6 +73,7 @@ const TopNav = () => {
                     </div>
                 </div>
             </nav>
+            <ToastContainer />
         </>
     )
 }

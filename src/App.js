@@ -2,16 +2,19 @@ import { Routes, Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import Home from "../src/pages/home/Home";
 import Contact from "./pages/contact/Contact";
-import Header from "../src/components/header/Header"
-import Footer from "../src/components/footer/Footer"
+import Header from "../src/components/header/Header";
+import Footer from "../src/components/footer/Footer";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
 import OrderHistory from "./pages/orderHistory/OrderHistory";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <BrowserRouter>
-    <Header/>
+    <ToastContainer/>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
@@ -20,7 +23,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }
