@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/config'
 import Loader from '../../components/loader/loader'
+import Swal from "sweetalert2"
 const Register = () => {
 
   const [email, setEmail] = useState("")
@@ -14,6 +15,16 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
+
+  const Alert = () => {
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Registration Successful...",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   const registerUser = (e) => {
     e.preventDefault();
@@ -26,8 +37,9 @@ const Register = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        toast.success("Registration Successful...");
         setIsLoading(false);
+        Alert();
+        toast.success("Registration Successful...");
         navigate("/login");
       })
       .catch((error) => {

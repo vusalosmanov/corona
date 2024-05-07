@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import LoginImg from '../../assets/image/iconss/login.png'
 import { Link, useNavigate } from 'react-router-dom'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from '../../firebase/config';
 import { toast, ToastContainer } from 'react-toastify';
 import Loader from '../../components/loader/loader'
+import Swal from "sweetalert2"
+import { GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
 
     const [email, setEmail] = useState("")
@@ -14,12 +16,24 @@ const Login = () => {
     const navigate = useNavigate()
 
 
+
+    const Alert = () => {
+        Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Login Successful...",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    };
+
     const loginUser = (e) => {
         e.preventDefault();
         setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setIsLoading(false);
+                Alert();
                 toast.success("Login Successful...");
                 navigate("/")
             })
@@ -28,6 +42,18 @@ const Login = () => {
                 toast.error(error.message);
             });
     };
+    const provider = new GoogleAuthProvider();
+    const signInWithGoogle = (e) => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                Alert();
+                navigate("/")
+            }).catch((error) => {
+                toast.error(error.message)
+            });
+
+    }
 
     return (
         <>
@@ -54,6 +80,7 @@ const Login = () => {
                             <Link to='/reset' className='text-[#106853]'>Şifrəmi unutdum</Link>
                         </div>
                         <button type='submit' to="" className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853] ">Daxil ol</button>
+                        <button onClick={signInWithGoogle} to="" className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853] ">Google</button>
                         <div className='flex items-center  justify-center flex-col lg:flex-row max-w-[600px] w-full'>
                             <span>Hesabınız yoxdur?</span>
                             <Link to='/register' className='text-[#106853]'>Qeydiyyat</Link>

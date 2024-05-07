@@ -5,10 +5,22 @@ import { sendPasswordResetEmail } from 'firebase/auth'
 import { auth } from '../../firebase/config'
 import { toast } from 'react-toastify'
 import Loader from '../../components/loader/loader'
+import Swal from "sweetalert2"
 const Reset = () => {
 
   const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+
+  
+  const Alert = () => {
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Chek your email for a reset link",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   const resetPassword = (e) => {
     e.preventDefault();
@@ -16,6 +28,7 @@ const Reset = () => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         setIsLoading(false)
+        Alert();
         toast.success("Chek your email for a reset link ")
       })
       .catch((error) => {

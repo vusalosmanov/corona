@@ -8,12 +8,12 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
 import OrderHistory from "./pages/orderHistory/OrderHistory";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <BrowserRouter>
-    <ToastContainer/>
+      {/* <ToastContainer /> */}
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

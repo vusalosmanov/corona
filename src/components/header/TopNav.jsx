@@ -4,10 +4,22 @@ import { signOut } from 'firebase/auth'
 import { ToastContainer, toast } from 'react-toastify'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../../firebase/config'
+import Swal from "sweetalert2"
 const TopNav = () => {
 
     const [displayName, setdisplayName] = useState("")
     const navigate = useNavigate()
+
+
+    const Alert = () => {
+        Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Logout successfully...",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    };
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -19,10 +31,13 @@ const TopNav = () => {
                 setdisplayName("");
             }
         });
-    } , [])
+    }, [])
+
+
     const logoutUser = () => {
         signOut(auth)
             .then(() => {
+                Alert();
                 toast.success("Logout successfully.");
                 navigate("/");
             })
