@@ -5,10 +5,14 @@ import { ToastContainer, toast } from 'react-toastify'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../../firebase/config'
 import Swal from "sweetalert2"
+import { useDispatch } from 'react-redux'
+import { SET_ACTIVE_USER } from '../../redux/slice/authSlice'
+
 const TopNav = () => {
 
     const [displayName, setdisplayName] = useState("")
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
 
     const Alert = () => {
@@ -24,9 +28,14 @@ const TopNav = () => {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                const uid = user.uid;
-                console.log(user.displayName);
+                // const uid = user.uid;
                 setdisplayName(user.displayName)
+
+                dispatch(SET_ACTIVE_USER({
+                    email: user.email,
+                    userName: user.displayName,
+                    userID: user.uid,
+                }))
             } else {
                 setdisplayName("");
             }
@@ -63,9 +72,9 @@ const TopNav = () => {
                         >
                             My Orders
                         </Link>
-                        <a href="#">
+                        <Link to="" className='text-[#ff0000] text-[16px] mr-[10px]' >
                             Hi, {displayName}
-                        </a>
+                        </Link>
                         <Link
                             to="/"
                             className=" mr-[20px]  text-[#fff]  text-[16px] relative hover:text-white"

@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import LoginImg from '../../assets/image/iconss/login.png'
 import { Link, useNavigate } from 'react-router-dom'
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup , GoogleAuthProvider } from "firebase/auth";
 import { auth } from '../../firebase/config';
 import { toast, ToastContainer } from 'react-toastify';
 import Loader from '../../components/loader/loader'
 import Swal from "sweetalert2"
-import { GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
 
     const [email, setEmail] = useState("")
@@ -23,13 +22,14 @@ const Login = () => {
             icon: "success",
             title: "Login Successful...",
             showConfirmButton: false,
-            timer: 1500,
+            timer: 8000,
         });
     };
 
     const loginUser = (e) => {
         e.preventDefault();
         setIsLoading(true);
+
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setIsLoading(false);
@@ -42,14 +42,17 @@ const Login = () => {
                 toast.error(error.message);
             });
     };
+
+    // Login with Google
     const provider = new GoogleAuthProvider();
     const signInWithGoogle = (e) => {
         signInWithPopup(auth, provider)
             .then((result) => {
-                const user = result.user;
+                // const user = result.user;
                 Alert();
                 navigate("/")
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 toast.error(error.message)
             });
 
