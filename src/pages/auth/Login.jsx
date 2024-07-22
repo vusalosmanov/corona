@@ -1,99 +1,105 @@
-import React, { useState } from 'react'
-import LoginImg from '../../assets/image/iconss/login.png'
-import { Link, useNavigate } from 'react-router-dom'
-import { signInWithEmailAndPassword, signInWithPopup , GoogleAuthProvider } from "firebase/auth";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config';
-import { toast, ToastContainer } from 'react-toastify';
-import Loader from '../../components/loader/loader'
-import Swal from "sweetalert2"
+import LoginImg from '../../assets/image/iconss/login.png'
+import { toast } from 'react-toastify';
+import Loader from '../../components/loader/loader';
+import { addUser } from '../../firebase/adminSetup'; // Admin və istifadəçi əlavə funksiyalarını idxal edin
+
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
-
-
-
-    const Alert = () => {
-        Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: "Login Successful...",
-            showConfirmButton: false,
-            timer: 8000,
-        });
-    };
-
-    const loginUser = (e) => {
+    const signIn = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
+        setLoading(true);
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                setIsLoading(false);
-                Alert();
-                toast.success("Login Successful...");
-                navigate("/")
-            })
-            .catch((error) => {
-                setIsLoading(false);
-                toast.error(error.message);
-            });
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // İstifadəçini müvafiq kolleksiyaya əlavə edin
+            await addUser(email);
+
+            // Admin olub olmadığını yoxlayın
+            const isAdmin = email === "vusal.osmanov66@gmail.com"; // Burada admin e-poçtunu təyin edin
+
+            setLoading(false);
+            if (isAdmin) {
+                toast.success('Login successful as Admin');
+                navigate('/dashboard'); // Admins are redirected to the dashboard
+            } else {
+                toast.success('Login successful');
+                navigate('/'); // Regular users are redirected to the home page
+            }
+        } catch (error) {
+            setLoading(false);
+            toast.error(error.message);
+        }
     };
-
-    // Login with Google
-    const provider = new GoogleAuthProvider();
-    const signInWithGoogle = (e) => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                // const user = result.user;
-                Alert();
-                navigate("/")
-            })
-            .catch((error) => {
-                toast.error(error.message)
-            });
-
-    }
 
     return (
         <>
-            {isLoading && <Loader />}
+            {loading && <Loader />}
             <section className='w-full h-auto'>
                 <div className='max-[1320px] w-full mx-auto flex justify-center gap-[40px] items-center h-[600px]'>
                     <div className='login w-[full]'>
                         <img src={LoginImg} alt="LoginImg" className='w-[400px] object-cover' />
                     </div>
-                    <form className="w-full flex justify-center items-center flex-col max-w-[450px]" onSubmit={loginUser}>
+                    <form className="w-full flex justify-center items-center flex-col max-w-[450px]" onSubmit={signIn}>
                         <h2 className="lg:mb-[55px] relative text-center capitalize text-[2rem]">Daxil ol</h2>
                         <div className="w-[40px]  h-[5px] rounded-lg bg-[#106853] block lg:hidden mt-[10px]"></div>
                         <div className="flex flex-row gap-[20px] w-full mt-[40px] lg:mt-[0]">
                             <div className="w-[100%] flex items-center justify-center flex-col">
                                 <div className="w-[100%] mb-[25px]">
-                                    <input type="text" className="block w-[100%] p-2 text-base font-normal leading-6 text-gray-700 bg-white border border-gray-300 appearance-none rounded-md px-[12px] py-[16px]" id="company" placeholder="E-poct ünvanı *" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    <input
+                                        type="email"
+                                        className="block w-[100%] p-2 text-base font-normal leading-6 text-gray-700 bg-white border border-gray-300 appearance-none rounded-md px-[12px] py-[16px]"
+                                        placeholder="E-poçt ünvanı *"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
                                 </div>
                                 <div className="w-[100%] mb-[25px]">
-                                    <input type="password" className="block w-full p-2 text-base font-normal leading-6 text-gray-700 bg-white border border-gray-300 appearance-none rounded-md px-[12px] py-[16px]" id="password" placeholder="Şifrə *" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                    <input
+                                        type="password"
+                                        className="block w-full p-2 text-base font-normal leading-6 text-gray-700 bg-white border border-gray-300 appearance-none rounded-md px-[12px] py-[16px]"
+                                        placeholder="Şifrə *"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
                                 </div>
                             </div>
                         </div>
                         <div className='flex items-center lg:justify-between justify-center flex-col lg:flex-row max-w-[600px] w-full'>
                             <Link to='/reset' className='text-[#106853]'>Şifrəmi unutdum</Link>
                         </div>
-                        <button type='submit' to="" className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853] ">Daxil ol</button>
-                        <button onClick={signInWithGoogle} to="" className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853] ">Google</button>
-                        <div className='flex items-center  justify-center flex-col lg:flex-row max-w-[600px] w-full'>
+                        <button
+                            type='submit'
+                            className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853]"
+                        >
+                            Daxil ol
+                        </button>
+                        <button
+                            type='button'
+                            className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853]"
+                            onClick={() => { /* Google login functionality to be added */ }}
+                        >
+                            Google
+                        </button>
+                        <div className='flex items-center justify-center flex-col lg:flex-row max-w-[600px] w-full'>
                             <span>Hesabınız yoxdur?</span>
                             <Link to='/register' className='text-[#106853]'>Qeydiyyat</Link>
                         </div>
                     </form>
                 </div>
             </section>
-            <ToastContainer />
         </>
-    )
-}
+    );
+};
 
-export default Login        
+export default Login;
