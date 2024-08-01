@@ -7,6 +7,7 @@ const Admin = () => {
   const admin_nav = [
     { display: 'Dashboard', path: '/dashboard' },
     { display: 'All-Products', path: '/dashboard/all-products' },
+    { display: 'Add-Products', path: '/dashboard/add-products' },
     { display: 'Orders', path: '/dashboard/orders' },
     { display: 'Users', path: '/dashboard/users' }
   ];
@@ -15,7 +16,7 @@ const Admin = () => {
 
   return (
     <>
-      <div className='max-w-[1320px] mx-auto bg-gray-100 shadow-md'>
+      <div className='w-full max-w-[1470px] mx-auto p-6 bg-white shadow-lg rounded-md'>
         <div className='w-full flex justify-between items-center px-4 py-3 bg-white'>
           <div>
             <h2 className='text-2xl font-bold text-gray-800'>Corona</h2>
@@ -53,7 +54,7 @@ const Admin = () => {
           </ul>
         </nav>
       </div>
-      <div className='content p-4'>
+      <div className='content p-6'>
         <Outlet />
       </div>
     </>

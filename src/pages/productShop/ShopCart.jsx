@@ -1,5 +1,4 @@
 import React from 'react'
-import { cartActions } from '../../redux/slice/cartSlice'
 import { useSelector } from 'react-redux'
 const ShopCart = () => {
 

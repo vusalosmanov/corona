@@ -9,7 +9,6 @@ import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
 import OrderHistory from "./pages/orderHistory/OrderHistory";
 // import ProductDetails from "./pages/detailes/ProductDetails";
-import Shop from "./pages/shop/Shop";
 import ProductCart from "./pages/cart/ProductCart";
 import ShopCart from "./pages/productShop/ShopCart";
 import AllProducts from "./pages/admin/AllProducts";
@@ -20,6 +19,7 @@ import Admin from "./pages/admin/Admin";
 import Users from "./pages/admin/Users";
 import { addAdmin } from "./firebase/adminSetup"; // Admin əlavə edən funksiyanı idxal edin
 import AddAdmin from "./pages/admin/AddAdmin";
+import Orders from "./pages/admin/Ordesr";
 
 function App() {
   useEffect(() => {
@@ -30,6 +30,8 @@ function App() {
 
   return (
     <Router>
+      <div className="min-h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-black">
+
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -38,13 +40,13 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/shop" element={<Shop />} />
         <Route element={<ProtectedRoute adminOnly={true} />}>
           <Route path="/dashboard" element={<Admin />}>
             <Route index element={<Dashboard />} />
             <Route path="all-products" element={<AllProducts />} />
             <Route path="add-products" element={<AddProducts />} />
             <Route path="users" element={<Users />} />
+            <Route path="orders" element={<Orders />} />
           </Route>
           <Route path="/addadmin" element={<AddAdmin />} />
         </Route>
@@ -53,6 +55,7 @@ function App() {
         <Route path="/shopcart" element={<ShopCart />} />
       </Routes>
       {/* <Footer /> */}
+      </div>  
     </Router>
   );
 }
