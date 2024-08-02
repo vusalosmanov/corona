@@ -6,6 +6,7 @@ const Home = () => {
   const { data: products, loading } = useGetData('products');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [sortOrder, setSortOrder] = useState('newToOld');
   const productsPerPage = 8;
 
   const groupByCategory = (products) => {
@@ -21,11 +22,21 @@ const Home = () => {
 
   const categorizedProducts = groupByCategory(products);
 
+  const sortProducts = (products) => {
+    return products.sort((a, b) => {
+      if (sortOrder === 'newToOld') {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      } else {
+        return new Date(a.createdAt) - new Date(b.createdAt);
+      }
+    });
+  };
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = selectedCategory === 'All'
-    ? products.slice(indexOfFirstProduct, indexOfLastProduct)
-    : (categorizedProducts[selectedCategory]?.slice(indexOfFirstProduct, indexOfLastProduct) || []);
+    ? sortProducts(products).slice(indexOfFirstProduct, indexOfLastProduct)
+    : (sortProducts(categorizedProducts[selectedCategory])?.slice(indexOfFirstProduct, indexOfLastProduct) || []);
 
   const totalPages = selectedCategory === 'All'
     ? Math.ceil(products.length / productsPerPage)
@@ -39,27 +50,38 @@ const Home = () => {
         <h5>Loading....</h5>
       ) : (
         <>
-          <div className="mb-4">
-            <label htmlFor="category" className="block text-gray-700 mb-2">Select Category</label>
-            <select
-              id="category"
-              value={selectedCategory}
-              onChange={(e) => {
-                setSelectedCategory(e.target.value);
-                setCurrentPage(1); // Reset to the first page when category changes
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="All">All</option>
-              {Object.keys(categorizedProducts).map(category => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+          <div className="mb-4 flex gap-4 justify-center">
+            <div>
+              <select
+                id="category"
+                value={selectedCategory}
+                onChange={(e) => {
+                  setSelectedCategory(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="All">All</option>
+                {Object.keys(categorizedProducts).map(category => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <select
+                id="sortOrder"
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="newToOld">New to Old</option>
+                <option value="oldToNew">Old to New</option>
+              </select>
+            </div>
           </div>
           <section className='mt-[40px]'>
-            <h2 className='text-2xl font-bold mb-4'>{selectedCategory === 'All' ? 'All Products' : selectedCategory}</h2>
             <div className='flex justify-center gap-4 flex-wrap'>
               {currentProducts.map(item => (
                 <ProductCart key={item.id} item={item} />
