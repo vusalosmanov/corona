@@ -45,7 +45,7 @@ const Home = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className='w-full max-w-[1320px] mx-auto px-[10px]'>
+    <div className='w-full max-w-[1400px] mx-auto px-[10px]'>
       {loading ? (
         <h5>Loading....</h5>
       ) : (
@@ -82,7 +82,7 @@ const Home = () => {
             </div>
           </div>
           <section className='mt-[40px]'>
-            <div className='flex justify-center gap-4 flex-wrap'>
+            <div className='flex justify-start gap-4 flex-wrap'>
               {currentProducts.map(item => (
                 <ProductCart key={item.id} item={item} />
               ))}

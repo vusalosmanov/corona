@@ -5,28 +5,30 @@ import { auth } from '../../firebase/config';
 import LoginImg from '../../assets/image/iconss/login.png'
 import { toast } from 'react-toastify';
 import Loader from '../../components/loader/loader';
-import { addUser } from '../../firebase/adminSetup'; // Admin və istifadəçi əlavə funksiyalarını idxal edin
+import { cartActions } from '../../redux/slice/cartSlice';
+import { addUser } from '../../firebase/adminSetup';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
     const signIn = async (e) => {
         e.preventDefault();
         setLoading(true);
+        dispatch(cartActions.setLoggedIn(true));
 
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // İstifadəçini müvafiq kolleksiyaya əlavə edin
             await addUser(email);
 
-            // Admin olub olmadığını yoxlayın
-            const isAdmin = email === "vusal.osmanov66@gmail.com"; // Burada admin e-poçtunu təyin edin
+            const isAdmin = email === "vusal.osmanov66@gmail.com";
 
             setLoading(false);
             if (isAdmin) {
@@ -84,13 +86,13 @@ const Login = () => {
                         >
                             Daxil ol
                         </button>
-                        <button
+                        {/* <button
                             type='button'
                             className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853]"
-                            onClick={() => { /* Google login functionality to be added */ }}
+                            onClick={() => { }}
                         >
                             Google
-                        </button>
+                        </button> */}
                         <div className='flex items-center justify-center flex-col lg:flex-row max-w-[600px] w-full'>
                             <span>Hesabınız yoxdur?</span>
                             <Link to='/register' className='text-[#106853]'>Qeydiyyat</Link>
