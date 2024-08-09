@@ -21,13 +21,13 @@ const Admin = () => {
           <div>
             <h2 className='text-2xl font-bold text-white'>Corona</h2>
           </div>
-          <div className='flex-grow mx-4 flex justify-center'>
+          {/* <div className='flex-grow mx-4 flex justify-center'>
             <input
               type="text"
               placeholder='Search...'
               className='w-[600px] py-2 px-4 rounded border border-gray-300 focus:outline-none focus:border-blue-500'
             />
-          </div>
+          </div> */}
           <div className='relative'>
             <img
               src={currentUser?.photoURL}

@@ -47,7 +47,11 @@ const Home = () => {
   return (
     <div className='w-full max-w-[1400px] mx-auto px-[10px]'>
       {loading ? (
-        <h5>Loading....</h5>
+        <div className="flex items-center justify-center h-screen ">
+          <div className="p-6 bg-white shadow-lg rounded-md text-center">
+            <h5 className="text-xl font-semibold text-gray-700">Loading...</h5>
+          </div>
+        </div>
       ) : (
         <>
           <div className="mb-4 flex gap-4 justify-center">

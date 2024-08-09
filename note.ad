@@ -21,11 +21,11 @@ https://support.apple.com/en-us/108054 imac detailes and image
 
 
 1- Project Design 
-page - Home , Dasboard , Products , Invoice , profile ,  shope , detailes , Payment , register and Login , contact us
+page - Home , Dasboard , Products , Invoice , profile ,  shope , detailes , Payment , register and Login , contact us +
 
 
 
-props home cart shop helmes corona-home
+props home cart shop helmes corona-home +
 
 
 framer-motion
@@ -33,9 +33,8 @@ framer-motion
 1:43;10 header top scrool
 
 
-header bolumunu duzenlemek 
-footer bolmunu duzenlemek 
-ordes bolumunu duzenlemek
+header bolumunu duzenlemek +
+ordes bolumunu duzenlemek +
 
-yeni productlar elave etmek 
-yeni keyler
+yeni productlar elave etmek + 
+yeni keyler +

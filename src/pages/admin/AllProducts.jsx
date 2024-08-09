@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FaTrash, FaEdit } from 'react-icons/fa';
-import { AiOutlineEdit } from "react-icons/ai";// Edit icon from react-icons
+import { FaTrash } from 'react-icons/fa';
+import { AiOutlineEdit } from "react-icons/ai";
 import useGetData from '../../customHooks/useGetData';
 import { db } from '../../firebase/config';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
@@ -21,6 +21,7 @@ const AllProducts = () => {
     gpu: '',
     storageCapacity: ''
   });
+  const [searchTerm, setSearchTerm] = useState('');
 
   const deleteProduct = async (id) => {
     await deleteDoc(doc(db, 'products', id));
@@ -62,13 +63,28 @@ const AllProducts = () => {
     toast.success('Product updated successfully!');
     setSelectedProduct(null);
   };
+  const filteredProducts = productsData.filter(product =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="w-full mx-auto p-6 bg-[#0B1739] shadow-lg rounded-md">
-      <h2 className="text-3xl font-bold mb-6 text-white">All Products</h2>
+      <div className='flex justify-between'>
+        <h2 className="text-3xl font-bold mb-6 text-white">All Products</h2>
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Search pro..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full max-w-[300px] px-4 py-2 bg-[#0B1739] border rounded-md"
+          />
+        </div>
+      </div>
+
       <div className="overflow-x-auto">
         <table className="w-full rounded-lg">
-          <thead className=" text-white uppercase text-sm">
+          <thead className="text-white uppercase text-sm">
             <tr>
               <th className="border-b px-4 py-2 text-start">Name</th>
               <th className="border-b px-4 py-2 text-start">Image</th>
@@ -88,8 +104,8 @@ const AllProducts = () => {
                   </div>
                 </td>
               </tr>
-            ) : productsData.length > 0 ? (
-              productsData.map((item) => (
+            ) : filteredProducts.length > 0 ? (
+              filteredProducts.map((item) => (
                 <React.Fragment key={item.id}>
                   <tr className="hover:bg-gray-50 transition-colors text-center text-white hover:text-[#1f222f] font-medium">
                     <td className="border-b px-4 py-2 text-start">{item.title}</td>
@@ -103,7 +119,7 @@ const AllProducts = () => {
                         className="text-blue-500 hover:text-blue-700 transition-colors"
                         onClick={() => toggleEditForm(item)}
                       >
-                        <AiOutlineEdit  className="w-5 h-5" />
+                        <AiOutlineEdit className="w-5 h-5" />
                       </button>
                     </td>
                     <td className="border-b px-4 py-2 text-center">
@@ -132,10 +148,10 @@ const AllProducts = () => {
 
       {selectedProduct && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white w-[600px] p-6 rounded-md shadow-lg h-auto top-0">
+          <div className="bg-white w-[600px] p-6 rounded-md shadow-lg">
             <h3 className="text-2xl font-bold mb-4">{editFormData.title}</h3>
             <form onSubmit={handleEditSubmit} className="text-left">
-              <div className="flex justify-center ">
+              <div className="flex justify-center">
                 {editFormData.imgUrl && (
                   <div className="mt-4">
                     <img
@@ -146,19 +162,19 @@ const AllProducts = () => {
                   </div>
                 )}
               </div>
-              <div className="flex flex-wrap  justify-between font-semibold mt-[10px] ">
-                <div className="mb-4 ">
-                  <label className="block text-gray-700 mb-2 " htmlFor="title">Name</label>
+              <div className="flex flex-wrap justify-between font-semibold mt-4">
+                <div className="mb-4 w-full">
+                  <label className="block text-gray-700 mb-2" htmlFor="title">Name</label>
                   <input
                     type="text"
                     id="title"
                     name="title"
                     value={editFormData.title}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 w-full">
                   <label className="block text-gray-700 mb-2" htmlFor="price">Price</label>
                   <input
                     type="number"
@@ -166,10 +182,10 @@ const AllProducts = () => {
                     name="price"
                     value={editFormData.price}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 w-full">
                   <label className="block text-gray-700 mb-2" htmlFor="category">Category</label>
                   <input
                     type="text"
@@ -177,10 +193,10 @@ const AllProducts = () => {
                     name="category"
                     value={editFormData.category}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4 w-[228px]">
+                <div className="mb-4 w-full">
                   <label className="block text-gray-700 mb-2" htmlFor="date">Date</label>
                   <input
                     type="date"
@@ -188,10 +204,10 @@ const AllProducts = () => {
                     name="date"
                     value={editFormData.date}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 w-full">
                   <label className="block text-gray-700 mb-2" htmlFor="color">Color</label>
                   <input
                     type="text"
@@ -199,10 +215,10 @@ const AllProducts = () => {
                     name="color"
                     value={editFormData.color}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 w-full">
                   <label className="block text-gray-700 mb-2" htmlFor="os">OS</label>
                   <input
                     type="text"
@@ -213,7 +229,7 @@ const AllProducts = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 w-full">
                   <label className="block text-gray-700 mb-2" htmlFor="cpu">CPU</label>
                   <input
                     type="text"
@@ -224,7 +240,7 @@ const AllProducts = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 w-full">
                   <label className="block text-gray-700 mb-2" htmlFor="gpu">GPU</label>
                   <input
                     type="text"
@@ -235,8 +251,8 @@ const AllProducts = () => {
                     className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2" htmlFor="storageCapacity">Storage</label>
+                <div className="mb-4 w-full">
+                  <label className="block text-gray-700 mb-2" htmlFor="storageCapacity">Storage Capacity</label>
                   <input
                     type="text"
                     id="storageCapacity"
@@ -247,19 +263,12 @@ const AllProducts = () => {
                   />
                 </div>
               </div>
-              <div className="text-right">
+              <div className="mt-4 flex justify-end">
                 <button
                   type="submit"
-                  className="bg-[#0B1739] text-white px-4 py-2 rounded-md hover:bg-[#081028] transition-colors"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
                 >
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  className="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
-                  onClick={() => setSelectedProduct(null)}
-                >
-                  Cancel
+                  Save Changes
                 </button>
               </div>
             </form>
@@ -271,4 +280,3 @@ const AllProducts = () => {
 };
 
 export default AllProducts;
-

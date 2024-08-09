@@ -39,56 +39,6 @@ const ProductDetails = () => {
   }
 
   return (
-    // <div className="max-w-[1320px] w-full mx-auto p-6">
-    //   <h2 className="text-3xl font-bold mb-6 text-white">{product.title}</h2>
-    //   <div className="flex justify-between">
-    //     <div className="w-1/2 pr-4">
-    //       <img
-    //         src={product.imgUrl}
-    //         alt={product.title || 'Product image'}
-    //         className="w-full h-auto rounded-md"
-    //       />
-    //     </div>
-    //     <div className="w-1/2">
-    //       <table className=" text-white ">
-    //         <tbody>
-    //           <tr>
-    //             <th className="py-2 px-4 text-left border-b">Date</th>
-    //             <td className="py-2 px-4 border-b">{product.date}</td>
-    //           </tr>
-    //           <tr>
-    //             <th className="py-2 px-4 text-left border-b">Color</th>
-    //             <td className="py-2 px-4 border-b">{product.color}</td>
-    //           </tr>
-    //           <tr>
-    //             <th className="py-2 px-4 text-left border-b">OS</th>
-    //             <td className="py-2 px-4 border-b">{product.os}</td>
-    //           </tr>
-    //           <tr>
-    //             <th className="py-2 px-4 text-left border-b">CPU</th>
-    //             <td className="py-2 px-4 border-b">{product.cpu}</td>
-    //           </tr>
-    //           <tr>
-    //             <th className="py-2 px-4 text-left border-b">GPU</th>
-    //             <td className="py-2 px-4 border-b">{product.gpu}</td>
-    //           </tr>
-    //           <tr>
-    //             <th className="py-2 px-4 text-left border-b">Storage Capacity</th>
-    //             <td className="py-2 px-4 border-b">{product.storageCapacity}</td>
-    //           </tr>
-    //           <tr>
-    //             <th className="py-2 px-4 text-left border-b">Category</th>
-    //             <td className="py-2 px-4 border-b">{product.category}</td>
-    //           </tr>
-    //           <tr>
-    //             <th className="py-2 px-4 text-left border-b">Price</th>
-    //             <td className="py-2 px-4 border-b">{product.price ? `${product.price} USD` : 'No price available'}</td>
-    //           </tr>
-    //         </tbody>
-    //       </table>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="max-w-[1320px] my-0 mx-auto pr-[15px] pl-[15px] w-full relative py-[40px] mb-[40px] ">
       <div className="detailes lg:flex   ">
         <div className='flex justify-center flex-row  items-center mb-[40px] w-full lg:max-w-[50%] px-[12px]'>
