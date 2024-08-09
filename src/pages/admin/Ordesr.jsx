@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { db, collection, getDocs, updateDoc, doc, deleteDoc } from '../../firebase/config';
 import { AiOutlineDown, AiOutlineUp, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
-
+import { CiSearch } from "react-icons/ci";
 const OrdersPage = () => {
     const [orders, setOrders] = useState([]);
-    const [editOrderId, setEditOrderId] = useState(null); 
-    const [newStatus, setNewStatus] = useState(''); 
-    const [newDate, setNewDate] = useState(''); 
-    const [newAddress, setNewAddress] = useState(''); 
+    const [editOrderId, setEditOrderId] = useState(null);
+    const [newStatus, setNewStatus] = useState('');
+    const [newDate, setNewDate] = useState('');
+    const [newAddress, setNewAddress] = useState('');
     const [expandedOrderId, setExpandedOrderId] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -48,7 +49,7 @@ const OrdersPage = () => {
         setNewStatus(currentStatus);
         setNewDate(currentDate);
         setNewAddress(currentAddress);
-        setExpandedOrderId(null); 
+        setExpandedOrderId(null);
     };
 
     const handleSaveClick = async (orderId) => {
@@ -68,9 +69,9 @@ const OrdersPage = () => {
     const getStatusColor = (status) => {
         switch (status) {
             case '· Pending':
-                return 'text-yellow-500'; 
+                return 'text-yellow-500';
             case '· Delivered':
-                return 'text-green-500'; 
+                return 'text-green-500';
             case '· Canceled':
                 return 'text-red-500';
             default:
@@ -78,9 +79,27 @@ const OrdersPage = () => {
         }
     };
 
+    const filteredOrders = orders.filter(order =>
+        order.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.orderNumber.toString().includes(searchTerm)
+    );
+
     return (
         <div className="orders-page p-4 bg-[#0B1739] shadow-md rounded-lg">
-            <h2 className="text-2xl font-normal font-sans mb-6 text-white text-[18px]">Orders Status</h2>
+            <div className='flex justify-between'>
+                <h2 className="text-2xl font-normal font-sans mb-6 text-white text-[18px]">Orders Status</h2>
+                <div className="relative mb-4">
+                    <CiSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
+                    <input
+                        type="text"
+                        placeholder="Search orders..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full px-4 py-2 pl-10 border bg-[#0B1739] border-gray-300 rounded-md text-white"
+                    />
+                </div>
+            </div>
+
             <table className="min-w-full bg-white shadow-md rounded-lg mb-6">
                 <thead className="bg-[#0B1739] text-white">
                     <tr>
@@ -95,7 +114,7 @@ const OrdersPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.map((order) => (
+                    {filteredOrders.map((order) => (
                         <React.Fragment key={order.id}>
                             <tr className="bg-[#081028] font-medium text-white">
                                 <td className="py-4 px-6 text-center">{order.orderNumber}</td>
@@ -122,11 +141,11 @@ const OrdersPage = () => {
                                         <select
                                             value={newStatus}
                                             onChange={(e) => setNewStatus(e.target.value)}
-                                            className="bg-[#0B1739]  p-4"
+                                            className="bg-[#0B1739] p-4"
                                         >
-                                            <option value="· Pending" className={getStatusColor(' · Pending')}>· Pending</option>
+                                            <option value="· Pending" className={getStatusColor('· Pending')}>· Pending</option>
                                             <option value="· Delivered" className={getStatusColor('· Delivered')}>· Delivered</option>
-                                            <option value="· Canceled" className={getStatusColor('·Canceled')}>· Canceled</option>
+                                            <option value="· Canceled" className={getStatusColor('· Canceled')}>· Canceled</option>
                                         </select>
                                     ) : (
                                         <span className={getStatusColor(order.status)}>{order.status}</span>
@@ -165,16 +184,16 @@ const OrdersPage = () => {
                                             </button>
                                         </>
                                     ) : (
-                                        <>
+                                        <div className='flex justify-evenly'>
                                             <AiOutlineEdit
                                                 onClick={() => handleEditClick(order.id, order.status, order.date, order.address)}
-                                                className="text-gray-500 cursor-pointer mr-2"
+                                                className="text-blue-500 cursor-pointer mr-2"
                                             />
                                             <AiOutlineDelete
                                                 onClick={() => handleDeleteClick(order.id)}
                                                 className="text-red-500 cursor-pointer"
                                             />
-                                        </>
+                                        </div>
                                     )}
                                 </td>
                             </tr>

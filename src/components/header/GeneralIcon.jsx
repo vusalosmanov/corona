@@ -13,7 +13,7 @@ const GeneralIcon = () => {
           <div className="flex items-center">
             <Link to="/shopcart" className="relative">
               <img src={shoping} alt="Shopping Cart" className="w-6 lg:w-6" />
-              <div className="absolute top-[-10px] left-5 lg:w-[18px] w-[18px] h-[18px] bg-red-600 rounded-full flex items-center justify-center text-white text-xs">
+              <div className="absolute top-[-10px] left-5 lg:w-[18px] w-[18px] h-[18px] bg-[#6d7386] rounded-full flex items-center justify-center text-white text-xs">
                 {totalQuantity}
               </div>
             </Link>
