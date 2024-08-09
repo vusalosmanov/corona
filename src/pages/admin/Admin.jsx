@@ -16,10 +16,10 @@ const Admin = () => {
 
   return (
     <>
-      <div className='w-full max-w-[1470px] mx-auto p-6 bg-white shadow-lg rounded-md'>
-        <div className='w-full flex justify-between items-center px-4 py-3 bg-white'>
+      <div className='w-full max-w-[1470px] mx-auto p-6 bg-[#0B1739] shadow-lg rounded-md'>
+        <div className='w-full flex justify-between items-center px-4 py-3 '>
           <div>
-            <h2 className='text-2xl font-bold text-gray-800'>Corona</h2>
+            <h2 className='text-2xl font-bold text-white'>Corona</h2>
           </div>
           <div className='flex-grow mx-4 flex justify-center'>
             <input
@@ -37,14 +37,14 @@ const Admin = () => {
             <div className='absolute top-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white'></div>
           </div>
         </div>
-        <nav className='bg-gray-200 py-2'>
+        <nav className='bg-white py-2 rounded-md'>
           <ul className='flex justify-around'>
             {admin_nav.map((item, index) => (
               <li key={index} className='mx-2'>
                 <NavLink
                   to={item.path}
                   className={({ isActive }) => 
-                    `px-4 py-2 rounded-md font-medium text-gray-700 ${isActive ? 'bg-blue-500 text-white' : 'hover:bg-blue-100'}`
+                    `px-4 py-2 rounded-md font-medium text-gray-700 ${isActive ? 'bg-[#0B1739] text-white' : 'hover:bg-blue-100'}`
                   }
                 >
                   {item.display}

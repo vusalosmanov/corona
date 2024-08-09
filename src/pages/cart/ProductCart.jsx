@@ -30,7 +30,7 @@ const ProductCart = ({ item }) => {
           <span className="new">{item.price} $</span>
         </div>
       </div>
-      <button className="max-w-[150px] py-[10px] px-[20px] font-medium text-[black] w-[100%] border-black border-[1px] rounded hover:bg-blue-500 hover:border-white hover:text-[white] transition ease-in-out duration-200" onClick={addToCart}>
+      <button className="max-w-[150px] py-[10px] px-[20px] font-medium text-[black] w-[100%] border-black border-[1px] rounded hover:bg-[#0B1739] hover:border-white hover:text-[white] transition ease-in-out duration-200" onClick={addToCart}>
         Add to cart
       </button>
     </div>

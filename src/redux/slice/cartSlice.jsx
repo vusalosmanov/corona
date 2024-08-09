@@ -4,7 +4,7 @@ const initialState = {
     cartItems: [],
     totalAmount: 0,
     totalQuantity: 0,
-    isLoggedIn: false
+    isLoggedIn: false 
 };
 
 const cartSlice = createSlice({

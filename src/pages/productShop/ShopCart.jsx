@@ -15,7 +15,7 @@ const ShopCart = () => {
         if (isLoggedIn) {
             navigate('/invoice'); 
         } else {
-            navigate('/login'); 
+            navigate('/invoice')
         }
     };
 

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Contact from "./pages/contact/Contact";
 import Header from "./components/header/Header";
-// import Footer from "./components/footer/Footer";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
@@ -31,7 +30,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-black">
+      <div className="min-h-screen bg-[#081028]">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -47,15 +46,14 @@ function App() {
               <Route path="add-products" element={<AddProducts />} />
               <Route path="users" element={<Users />} />
               <Route path="orders" element={<Orders />} />
+              <Route path="add-admin" element={<AddAdmin />} />
             </Route>
-            <Route path="/addadmin" element={<AddAdmin />} />
           </Route>
           {/* <Route path="/shop/:id" element={<ProductDetails />} /> */}
           <Route path="/productcart" element={<ProductCart />} />
           <Route path="/shopcart" element={<ShopCart />} />
           <Route path="/invoice" element={<Invoice />} />
         </Routes>
-        {/* <Footer /> */}
       </div>
     </Router>
   );

@@ -64,11 +64,11 @@ const AllProducts = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-6 bg-white shadow-lg rounded-md">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">All Products</h2>
+    <div className="w-full mx-auto p-6 bg-[#0B1739] shadow-lg rounded-md">
+      <h2 className="text-3xl font-bold mb-6 text-white">All Products</h2>
       <div className="overflow-x-auto">
-        <table className="w-full bg-gray-50 border border-gray-200 rounded-lg">
-          <thead className="bg-gray-100 text-gray-600 uppercase text-sm">
+        <table className="w-full rounded-lg">
+          <thead className=" text-white uppercase text-sm">
             <tr>
               <th className="border-b px-4 py-2 text-start">Name</th>
               <th className="border-b px-4 py-2 text-start">Image</th>
@@ -91,7 +91,7 @@ const AllProducts = () => {
             ) : productsData.length > 0 ? (
               productsData.map((item) => (
                 <React.Fragment key={item.id}>
-                  <tr className="hover:bg-gray-50 transition-colors text-center font-medium">
+                  <tr className="hover:bg-gray-50 transition-colors text-center text-white hover:text-[#1f222f] font-medium">
                     <td className="border-b px-4 py-2 text-start">{item.title}</td>
                     <td className="border-b px-4 py-2">
                       <img src={item.imgUrl} alt={item.title} className="w-[100px] h-[70px] object-cover rounded-lg" />
@@ -250,7 +250,7 @@ const AllProducts = () => {
               <div className="text-right">
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                  className="bg-[#0B1739] text-white px-4 py-2 rounded-md hover:bg-[#081028] transition-colors"
                 >
                   Submit
                 </button>
