@@ -6,8 +6,7 @@ import Header from "./components/header/Header";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Reset from "./pages/auth/Reset";
-import OrderHistory from "./pages/orderHistory/OrderHistory";
-// import ProductDetails from "./pages/detailes/ProductDetails";
+import ProductDetails from "./pages/detailes/ProducDetailes";
 import ProductCart from "./pages/cart/ProductCart";
 import ShopCart from "./pages/productShop/ShopCart";
 import AllProducts from "./pages/admin/AllProducts";
@@ -35,7 +34,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<Reset />} />
@@ -49,7 +47,7 @@ function App() {
               <Route path="add-admin" element={<AddAdmin />} />
             </Route>
           </Route>
-          {/* <Route path="/shop/:id" element={<ProductDetails />} /> */}
+          <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path="/productcart" element={<ProductCart />} />
           <Route path="/shopcart" element={<ShopCart />} />
           <Route path="/invoice" element={<Invoice />} />

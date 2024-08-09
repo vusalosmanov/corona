@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AiOutlineDelete } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
@@ -9,25 +9,32 @@ const ShopCart = () => {
     const totalAmount = useSelector(state => state.cart.totalAmount);
     const isLoggedIn = useSelector(state => state.cart.isLoggedIn);
     const dispatch = useDispatch();
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log('Total Amount has changed:', totalAmount);
+    }, [totalAmount]);
 
     const handleCheckout = () => {
         if (isLoggedIn) {
-            navigate('/invoice'); 
+            navigate('/invoice');
         } else {
             navigate('/invoice')
         }
     };
+    const formattedTotalAmount = new Intl.NumberFormat().format(totalAmount);
 
     return (
         <>
             {cartItems.length === 0 ? (
-                <h2 className="text-2xl text-gray-700">Movcud deyil</h2>
+                <div className='w-full flex items-center justify-center'>
+                    <h2 className="text-2xl text-white">Movcud deyil</h2>
+                </div>
             ) : (
                 <div className="max-w-[1320px] mx-auto p-4 flex">
                     <div className="overflow-x-auto w-[900px]">
-                        <table className="min-w-full bg-white shadow-md rounded-lg">
-                            <thead className="bg-gray-800 text-white">
+                        <table className="min-w-full bg-[#0B1739]">
+                            <thead className="border-b-2 text-white">
                                 <tr>
                                     <th className="w-1/6 py-3 px-4 text-center">Image</th>
                                     <th className="w-1/6 py-3 px-4 text-center">Name</th>
@@ -39,7 +46,7 @@ const ShopCart = () => {
                             </thead>
                             <tbody>
                                 {cartItems.map((item, index) => (
-                                    <tr className="hover:bg-gray-100 font-medium text-gray-800" key={index}>
+                                    <tr className="hover:bg-gray-100 font-medium text-white hover:text-[#252a39] border-b-2" key={index}>
                                         <td className="py-4 px-6 text-center">
                                             <img src={item.imgUrl} alt={item.productName} className="w-20 h-20 object-contain mx-auto" />
                                         </td>
@@ -69,7 +76,7 @@ const ShopCart = () => {
                                             </div>
                                         </td>
                                         <td className="py-4 px-6 text-center text-lg">
-                                            {item.totalPrice} USD
+                                            {item.totalPrice} $
                                         </td>
                                         <td className="py-4 px-6 flex h-[112px] justify-center items-center">
                                             <AiOutlineDelete
@@ -86,7 +93,7 @@ const ShopCart = () => {
                         <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
                         <div className="flex justify-between items-center mb-4">
                             <span className="text-lg">Total Price:</span>
-                            <span className="text-lg font-bold">{totalAmount} USD</span>
+                            <span className="text-lg font-bold">{formattedTotalAmount} $</span>
                         </div>
                         <button
                             className="w-full py-3 bg-blue-500 text-white text-lg rounded-md "

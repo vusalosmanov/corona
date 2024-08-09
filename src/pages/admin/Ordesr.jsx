@@ -144,7 +144,7 @@ const OrdersPage = () => {
                                         <span>{order.address}</span>
                                     )}
                                 </td>
-                                <td className="py-4 px-6 text-center">{order.totalAmount} USD</td>
+                                <td className="py-4 px-6 text-center">{order.totalAmount} $</td>
                                 <td className="py-4 px-6 text-center">
                                     <span onClick={() => toggleAccordion(order.id)} className="cursor-pointer">
                                         {expandedOrderId === order.id ? (

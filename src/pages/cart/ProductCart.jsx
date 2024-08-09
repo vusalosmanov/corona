@@ -27,7 +27,7 @@ const ProductCart = ({ item }) => {
           </h3>
         </div>
         <div className="flex justify-center items-center font-medium">
-          <span className="new">{item.price} $</span>
+          <span>{item.price} $</span>
         </div>
       </div>
       <button className="max-w-[150px] py-[10px] px-[20px] font-medium text-[black] w-[100%] border-black border-[1px] rounded hover:bg-[#0B1739] hover:border-white hover:text-[white] transition ease-in-out duration-200" onClick={addToCart}>

@@ -90,8 +90,8 @@ const Invoice = () => {
                         <tr key={index} className="hover:bg-gray-100 font-medium text-white  hover:text-[#212532]">
                             <td className="py-4 px-6 text-center">{item.productName}</td>
                             <td className="py-4 px-6 text-center">{item.quantity}</td>
-                            <td className="py-4 px-6 text-center">{item.price} USD</td>
-                            <td className="py-4 px-6 text-center">{item.totalPrice} USD</td>
+                            <td className="py-4 px-6 text-center">{item.price} $</td>
+                            <td className="py-4 px-6 text-center">{item.totalPrice} $</td>
                         </tr>
                     ))}
                 </tbody>
@@ -99,7 +99,7 @@ const Invoice = () => {
 
             <div className="flex justify-between items-center mb-4 text-white">
                 <span className="text-lg">Total Amount:</span>
-                <span className="text-lg font-bold">{totalAmount} USD</span>
+                <span className="text-lg font-bold">{totalAmount} $ </span>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
