@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaTrash } from 'react-icons/fa';
 import { AiOutlineEdit } from "react-icons/ai";
 import useGetData from '../../customHooks/useGetData';
 import { db } from '../../firebase/config';

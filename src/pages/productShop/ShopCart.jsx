@@ -31,8 +31,8 @@ const ShopCart = () => {
                     <h2 className="text-2xl text-white">Movcud deyil</h2>
                 </div>
             ) : (
-                <div className="max-w-[1320px] mx-auto p-4 flex">
-                    <div className="overflow-x-auto w-[900px]">
+                <div className="max-w-[1320px] mx-auto p-4 lg:flex">
+                    <div className="overflow-x-auto max-w-[900px] w-full mb-[20px]">
                         <table className="min-w-full bg-[#0B1739]">
                             <thead className="border-b-2 text-white">
                                 <tr>
@@ -89,19 +89,20 @@ const ShopCart = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className='w-[420px] h-[200px] bg-[#f5f5f5] shadow-md p-6 ml-4 rounded-lg'>
-                        <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
-                        <div className="flex justify-between items-center mb-4">
-                            <span className="text-lg">Total Price:</span>
-                            <span className="text-lg font-bold">{formattedTotalAmount} $</span>
+                    <div className='max-w-[420px] w-full h-auto bg-[#f5f5f5] shadow-md p-4 sm:p-6 lg:ml-4 rounded-lg'>
+                        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Order Summary</h2>
+                        <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
+                            <span className="text-base sm:text-lg">Total Price:</span>
+                            <span className="text-base sm:text-lg font-bold">{formattedTotalAmount} $</span>
                         </div>
                         <button
-                            className="w-full py-3 bg-blue-500 text-white text-lg rounded-md "
+                            className="w-full py-2 sm:py-3 bg-blue-500 text-white text-base sm:text-lg rounded-md"
                             onClick={handleCheckout}
                         >
                             Checkout
                         </button>
                     </div>
+
                 </div>
             )}
         </>

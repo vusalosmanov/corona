@@ -54,7 +54,7 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <div className="mb-4 flex gap-4 justify-center">
+          <div className="mb-4 flex gap-4 justify-center mt-[20px]">
             <div>
               <select
                 id="category"
@@ -86,7 +86,7 @@ const Home = () => {
             </div>
           </div>
           <section className='mt-[40px]'>
-            <div className='flex justify-start gap-4 flex-wrap'>
+            <div className='flex lg:justify-start gap-4 flex-wrap justify-center'>
               {currentProducts.map(item => (
                 <ProductCart key={item.id} item={item} />
               ))}
