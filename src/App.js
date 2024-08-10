@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { addAdmin } from "./firebase/adminSetup";
 import Home from "./pages/home/Home";
 import Contact from "./pages/contact/Contact";
 import Header from "./components/header/Header";
@@ -15,15 +16,13 @@ import ProtectedRoute from "./routers/ProtectedRoute";
 import Dashboard from "./pages/admin/Dashboard";
 import Admin from "./pages/admin/Admin";
 import Users from "./pages/admin/Users";
-import { addAdmin } from "./firebase/adminSetup";
 import AddAdmin from "./pages/admin/AddAdmin";
 import Orders from "./pages/admin/Ordesr";
 import Invoice from "./pages/invoice/Invoice";
 
 function App() {
   useEffect(() => {
-    // Admin konfiqurasiyasını çağırın
-    const adminEmail = "vusal.osmanov66@gmail.com"; // Burada admin e-mailini təyin edin
+    const adminEmail = "vusal.osmanov66@gmail.com";
     addAdmin(adminEmail);
   }, []);
 

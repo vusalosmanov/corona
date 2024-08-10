@@ -96,52 +96,53 @@ const Invoice = () => {
                     ))}
                 </tbody>
             </table>
-
             <div className="flex justify-between items-center mb-4 text-white">
                 <span className="text-lg">Total Amount:</span>
-                <span className="text-lg font-bold">{totalAmount} $ </span>
+                <span className="text-lg font-bold">{totalAmount} $</span>
             </div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label className="block text-white">Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded-md"
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="block text-white">Address</label>
-                    <input
-                        type="text"
-                        name="address"
-                        value={formData.address}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded-md"
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="block text-white">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded-md"
-                        required
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="w-full py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition"
-                >
-                    Submit Order
-                </button>
-            </form>
+            <div className='flex justify-center  w-full'>
+                <form onSubmit={handleSubmit} className="space-y-4 max-w-[400px] w-full flex flex-col justify-end">
+                    <div>
+                        <label className="block text-white">Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className="w-full px-[12px] py-[14px] border border-gray-300 rounded-md"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-white">Address</label>
+                        <input
+                            type="text"
+                            name="address"
+                            value={formData.address}
+                            onChange={handleChange}
+                            className="w-full px-[12px] py-[14px] border border-gray-300 rounded-md"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-white">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="w-full  border border-gray-300 rounded-md px-[12px] py-[14px]"
+                            required
+                        />
+                    </div>
+                    <button
+                        type='submit'
+                        className=" bg-gradient-to-r from-[#cb3cff] to-[#7f25fb] text-[#fff] px-[20px] py-[15px] w-full  rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold  transition-all"
+                    >
+                        Submit Order
+                    </button>
+                </form>
+            </div>
             <ToastContainer />
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db, collection, getDocs, updateDoc, doc, deleteDoc } from '../../firebase/config';
 import { AiOutlineDown, AiOutlineUp, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import { CiSearch } from "react-icons/ci";
+
 const OrdersPage = () => {
     const [orders, setOrders] = useState([]);
     const [editOrderId, setEditOrderId] = useState(null);
@@ -86,9 +87,9 @@ const OrdersPage = () => {
 
     return (
         <div className="orders-page p-4 bg-[#0B1739] shadow-md rounded-lg">
-            <div className='flex justify-between'>
-                <h2 className="text-2xl font-normal font-sans mb-6 text-white text-[18px]">Orders Status</h2>
-                <div className="relative mb-4">
+            <div className='flex flex-col md:flex-row justify-between mb-6'>
+                <h2 className="text-2xl font-normal font-sans mb-4 md:mb-0 text-white">Orders Status</h2>
+                <div className="relative w-full md:w-auto">
                     <CiSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
                     <input
                         type="text"
@@ -100,120 +101,122 @@ const OrdersPage = () => {
                 </div>
             </div>
 
-            <table className="min-w-full bg-white shadow-md rounded-lg mb-6">
-                <thead className="bg-[#0B1739] text-white">
-                    <tr>
-                        <th className="py-3 px-4 text-center">Order</th>
-                        <th className="py-3 px-4 text-start">Name</th>
-                        <th className="py-3 px-4 text-center">Date</th>
-                        <th className="py-3 px-4 text-center">Status</th>
-                        <th className="py-3 px-4 text-center">Address</th>
-                        <th className="py-3 px-4 text-center">Total Amount</th>
-                        <th className="py-3 px-4 text-center">Product</th>
-                        <th className="py-3 px-4 text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div className=' overflow-x-auto'>
+                <table className=" max-w-[1320px] justify-evenly mx-auto w-full shadow-md rounded-lg ">
+                    <thead className="bg-[#0B1739] text-white w-full">
+                        <tr>
+                            <th className="py-3 px-4 text-center">Order</th>
+                            <th className="py-3 px-4 text-start">Name</th>
+                            <th className="py-3 px-4 text-center">Date</th>
+                            <th className="py-3 px-4 text-center">Status</th>
+                            <th className="py-3 px-4 text-center">Address</th>
+                            <th className="py-3 px-4 text-center">Total Amount</th>
+                            <th className="py-3 px-4 text-center">Product</th>
+                            <th className="py-3 px-4 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {filteredOrders.map((order) => (
                         <React.Fragment key={order.id}>
                             <tr className="bg-[#081028] font-medium text-white">
-                                <td className="py-4 px-6 text-center">{order.orderNumber}</td>
-                                <td className="py-4 px-6 text-start">
+                            <td className="py-4 px-6 text-center text-sm md:text-base">{order.orderNumber}</td>
+                            <td className="py-4 px-6 text-start text-sm md:text-base">
                                     <div className="flex flex-col items-start">
-                                        <span className="block mb-1 font-medium">{order.name}</span>
+                                    <span className="block mb-1 font-medium">{order.name}</span>
                                         <span className="block text-[#AEB9E1] text-[12px]">{order.email}</span>
                                     </div>
-                                </td>
-                                <td className="py-4 px-6 text-center">
-                                    {editOrderId === order.id ? (
-                                        <input
-                                            type="date"
-                                            value={newDate}
-                                            onChange={(e) => setNewDate(e.target.value)}
-                                            className="bg-[#0B1739] p-4 text-white"
+                                    </td>
+                                <td className="py-4 px-6 text-center text-sm md:text-base">
+                                {editOrderId === order.id ? (
+                                    <input
+                                    type="date"
+                                    value={newDate}
+                                    onChange={(e) => setNewDate(e.target.value)}
+                                            className="bg-[#0B1739] p-2 text-white text-sm md:text-base"
                                         />
                                     ) : (
                                         <span>{order.date}</span>
-                                    )}
+                                        )}
                                 </td>
-                                <td className="py-4 px-6 text-center">
+                                <td className="py-4 px-6 text-center text-sm md:text-base">
                                     {editOrderId === order.id ? (
                                         <select
                                             value={newStatus}
                                             onChange={(e) => setNewStatus(e.target.value)}
-                                            className="bg-[#0B1739] p-4"
+                                            className="bg-[#0B1739] p-2 text-sm md:text-base"
                                         >
                                             <option value="· Pending" className={getStatusColor('· Pending')}>· Pending</option>
                                             <option value="· Delivered" className={getStatusColor('· Delivered')}>· Delivered</option>
                                             <option value="· Canceled" className={getStatusColor('· Canceled')}>· Canceled</option>
                                         </select>
-                                    ) : (
+                                        ) : (
                                         <span className={getStatusColor(order.status)}>{order.status}</span>
-                                    )}
-                                </td>
-                                <td className="py-4 px-6 text-center">
-                                    {editOrderId === order.id ? (
-                                        <input
+                                        )}
+                                        </td>
+                                        <td className="py-4 px-6 text-center text-sm md:text-base">
+                                        {editOrderId === order.id ? (
+                                            <input
                                             type="text"
                                             value={newAddress}
                                             onChange={(e) => setNewAddress(e.target.value)}
-                                            className="bg-[#0B1739] p-4 text-white"
-                                        />
-                                    ) : (
-                                        <span>{order.address}</span>
-                                    )}
-                                </td>
-                                <td className="py-4 px-6 text-center">{order.totalAmount} $</td>
-                                <td className="py-4 px-6 text-center">
-                                    <span onClick={() => toggleAccordion(order.id)} className="cursor-pointer">
-                                        {expandedOrderId === order.id ? (
-                                            <AiOutlineUp />
-                                        ) : (
-                                            <AiOutlineDown />
-                                        )}
-                                    </span>
-                                </td>
-                                <td className="py-4 px-6 text-center">
-                                    {editOrderId === order.id ? (
-                                        <>
-                                            <button onClick={() => handleSaveClick(order.id)} className="text-blue-500 mr-2">
+                                            className="bg-[#0B1739] p-2 text-white text-sm md:text-base"
+                                            />
+                                            ) : (
+                                                <span>{order.address}</span>
+                                                )}
+                                                </td>
+                                                <td className="py-4 px-6 text-center text-sm md:text-base">{order.totalAmount} $</td>
+                                                <td className="py-4 px-6 text-center text-sm md:text-base">
+                                                <span onClick={() => toggleAccordion(order.id)} className="cursor-pointer text-lg md:text-xl">
+                                                {expandedOrderId === order.id ? (
+                                                    <AiOutlineUp />
+                                                    ) : (
+                                                        <AiOutlineDown />
+                                                        )}
+                                                        </span>
+                                                        </td>
+                                                        <td className="py-4 px-6 text-center text-sm md:text-base">
+                                                        {editOrderId === order.id ? (
+                                                            <>
+                                            <button onClick={() => handleSaveClick(order.id)} className="text-blue-500 mr-2 text-sm md:text-base">
                                                 Save
                                             </button>
-                                            <button onClick={() => setEditOrderId(null)} className="text-gray-500">
+                                            <button onClick={() => setEditOrderId(null)} className="text-gray-500 text-sm md:text-base">
                                                 Cancel
-                                            </button>
+                                                </button>
                                         </>
                                     ) : (
-                                        <div className='flex justify-evenly'>
-                                            <AiOutlineEdit
-                                                onClick={() => handleEditClick(order.id, order.status, order.date, order.address)}
-                                                className="text-blue-500 cursor-pointer mr-2"
-                                            />
-                                            <AiOutlineDelete
-                                                onClick={() => handleDeleteClick(order.id)}
-                                                className="text-red-500 cursor-pointer"
-                                            />
+                                        <div className='flex justify-center gap-2'>
+                                        <AiOutlineEdit
+                                        onClick={() => handleEditClick(order.id, order.status, order.date, order.address)}
+                                        className="text-blue-500 cursor-pointer"
+                                        />
+                                        <AiOutlineDelete
+                                        onClick={() => handleDeleteClick(order.id)}
+                                        className="text-red-500 cursor-pointer"
+                                        />
                                         </div>
-                                    )}
+                                        )}
                                 </td>
-                            </tr>
+                                </tr>
                             {expandedOrderId === order.id && (
                                 <tr>
-                                    <td colSpan="8" className="py-4 px-6 text-white bg-[#0B1739]">
-                                        <div>
-                                            {order.cartItems.map((item, index) => (
-                                                <div key={index} className="mb-2">
+                                    <td colSpan="8" className="py-4 px-6 text-white bg-[#0B1739] text-sm md:text-base">
+                                    <div>
+                                    {order.cartItems.map((item, index) => (
+                                        <div key={index} className="mb-2">
                                                     <strong>{item.productName}</strong> - {item.quantity} x {item.price} USD
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </td>
-                                </tr>
-                            )}
-                        </React.Fragment>
-                    ))}
-                </tbody>
-            </table>
+                                                    </div>
+                                                    ))}
+                                                    </div>
+                                                    </td>
+                                                    </tr>
+                                                    )}
+                                                    </React.Fragment>
+                                                    ))}
+                                                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

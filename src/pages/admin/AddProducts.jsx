@@ -22,7 +22,6 @@ const AddProducts = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
@@ -38,6 +37,7 @@ const AddProducts = () => {
       });
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -50,7 +50,6 @@ const AddProducts = () => {
         return;
       }
 
-      // Create a reference to the file in Firebase Storage
       const storageRef = ref(storage, `productImages/${Date.now()}_${image.name}`);
       const uploadTask = uploadBytesResumable(storageRef, image);
 
@@ -81,7 +80,7 @@ const AddProducts = () => {
             });
 
             toast.success('Product added successfully!');
-            navigate("/dashboard/all-products")
+            navigate("/dashboard/all-products");
           } catch (error) {
             toast.error('Failed to add product.');
             console.error('Firestore error:', error);
@@ -98,9 +97,9 @@ const AddProducts = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-md">
+    <div className="max-w-[800px] mx-auto p-6 bg-white shadow-lg rounded-md">
       <h2 className="text-2xl font-bold mb-6 text-[#0B1739]">Add New Product</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit} className=" max-w-[800px] w-full lg:grid grid-cols-1 sm:grid-cols-2  gap-4">
         <div className="mb-4 col-span-2">
           {imagePreview && (
             <div className="mt-4 flex justify-center">
@@ -130,11 +129,10 @@ const AddProducts = () => {
             name="productName"
             value={formData.productName}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#0B1739]"
+            className="w-full px-4 py-2 border border-gray-300   rounded-md focus:outline-none focus:ring-2 focus:ring-[#0B1739]"
             required
           />
         </div>
-
         <div className="mb-4">
           <label className="block text-gray-700 mb-2" htmlFor="price">Price</label>
           <input
@@ -242,10 +240,11 @@ const AddProducts = () => {
             required
           />
         </div>
-        <div className="mb-4 col-span-2">
+
+        <div className="mb-4 col-span-2 flex justify-center">
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-[#0B1739] text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-[#0B1739]"
+            className="mt-[10px] bg-gradient-to-r from-[#cb3cff] to-[#7f25fb] text-[#fff] px-[20px] py-[15px] w-full max-w-[280px]  rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold  transition-all"
             disabled={loading}
           >
             {loading ? 'Adding Product...' : 'Add Product'}
@@ -257,3 +256,5 @@ const AddProducts = () => {
 };
 
 export default AddProducts;
+
+

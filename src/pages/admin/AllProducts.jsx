@@ -69,13 +69,13 @@ const AllProducts = () => {
 
   return (
     <div className="w-full mx-auto p-6 bg-[#0B1739] shadow-lg rounded-md">
-      <div className='flex justify-between'>
-        <h2 className="text-3xl font-bold mb-6 text-white">All Products</h2>
-        <div className="relative mb-4">
+      <div className='flex flex-col lg:flex-row justify-between items-center mb-6'>
+        <h2 className="text-3xl font-bold text-white mb-4 lg:mb-0">All Products</h2>
+        <div className="relative w-full max-w-xs lg:max-w-[300px]">
           <CiSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
           <input
             type="text"
-            placeholder="Search pro..."
+            placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full px-4 py-2 pl-10 border bg-[#0B1739] border-gray-300 rounded-md text-white"
@@ -115,7 +115,7 @@ const AllProducts = () => {
                     </td>
                     <td className="border-b px-4 py-2">${item.price}</td>
                     <td className="border-b px-4 py-2">{item.category}</td>
-                    <td className="border-b px-4 py-2 text-[12px] "><span className='p-1 rounded-3xl bg-green-700 font-semibold'>IN STOCK</span></td>
+                    <td className="border-b px-4 py-2 lg:text-[12px] text-[8px] "><span className='p-1 rounded-3xl bg-green-700 font-semibold'>IN STOCK</span></td>
                     <td className="border-b px-4 py-2 text-center">
                       <button
                         className="text-blue-500 hover:text-blue-700 transition-colors"
@@ -147,10 +147,17 @@ const AllProducts = () => {
       </div>
       {selectedProduct && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white w-[600px] p-6 rounded-md shadow-lg h-auto top-0">
-            <h3 className="text-2xl font-bold mb-4">{editFormData.title}</h3>
+          <div className="bg-white max-w-[600px] lg:p-6 p-10 rounded-md shadow-lg h-auto max-h-[90vh] overflow-auto">
+            <button
+              type="button"
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              onClick={() => setSelectedProduct(null)}
+            >
+              ×
+            </button>
+            <h3 className="text-2xl font-bold mb-4 text-center">{editFormData.title}</h3>
             <form onSubmit={handleEditSubmit} className="text-left">
-              <div className="flex justify-center ">
+              <div className="flex justify-center mb-4">
                 {editFormData.imgUrl && (
                   <div className="mt-4">
                     <img
@@ -161,16 +168,16 @@ const AllProducts = () => {
                   </div>
                 )}
               </div>
-              <div className="flex flex-wrap  justify-between font-semibold mt-[10px] ">
-                <div className="mb-4 ">
-                  <label className="block text-gray-700 mb-2 " htmlFor="title">Name</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="mb-4">
+                  <label className="block text-gray-700 mb-2" htmlFor="title">Name</label>
                   <input
                     type="text"
                     id="title"
                     name="title"
                     value={editFormData.title}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
                 <div className="mb-4">
@@ -181,7 +188,7 @@ const AllProducts = () => {
                     name="price"
                     value={editFormData.price}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
                 <div className="mb-4">
@@ -192,10 +199,10 @@ const AllProducts = () => {
                     name="category"
                     value={editFormData.category}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
-                <div className="mb-4 w-[228px]">
+                <div className="mb-4">
                   <label className="block text-gray-700 mb-2" htmlFor="date">Date</label>
                   <input
                     type="date"
@@ -203,7 +210,7 @@ const AllProducts = () => {
                     name="date"
                     value={editFormData.date}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
                 <div className="mb-4">
@@ -214,7 +221,7 @@ const AllProducts = () => {
                     name="color"
                     value={editFormData.color}
                     onChange={handleEditChange}
-                    className="w-full px-[16px] py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
                   />
                 </div>
                 <div className="mb-4">
@@ -262,7 +269,7 @@ const AllProducts = () => {
                   />
                 </div>
               </div>
-              <div className="text-right">
+              <div className="flex justify-end space-x-2 mt-4">
                 <button
                   type="submit"
                   className="bg-[#0B1739] text-white px-4 py-2 rounded-md hover:bg-[#081028] transition-colors"
@@ -271,7 +278,7 @@ const AllProducts = () => {
                 </button>
                 <button
                   type="button"
-                  className="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
+                  className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
                   onClick={() => setSelectedProduct(null)}
                 >
                   Cancel
@@ -281,6 +288,7 @@ const AllProducts = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

@@ -39,7 +39,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="max-w-[1320px] my-0 mx-auto pr-[15px] pl-[15px] w-full relative py-[40px] mb-[40px] ">
+    <div className="max-w-[1320px] my-0 mx-auto pr-[15px] pl-[15px] w-full relative py-[40px] mb-[40px]   h-full ">
       <div className="detailes lg:flex   ">
         <div className='flex justify-center flex-row  items-center mb-[40px] w-full lg:max-w-[50%] px-[12px]'>
           <div className='lg:h-[400px] h-[300px] w-full lg:max-w-[600px]  '>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config';
-import LoginImg from '../../assets/image/iconss/login.png'
 import { toast } from 'react-toastify';
 import Loader from '../../components/loader/loader';
 import { cartActions } from '../../redux/slice/cartSlice';
@@ -33,10 +32,10 @@ const Login = () => {
             setLoading(false);
             if (isAdmin) {
                 toast.success('Login successful as Admin');
-                navigate('/dashboard'); // Admins are redirected to the dashboard
+                navigate('/dashboard');
             } else {
                 toast.success('Login successful');
-                navigate('/'); // Regular users are redirected to the home page
+                navigate('/');
             }
         } catch (error) {
             setLoading(false);
@@ -49,19 +48,16 @@ const Login = () => {
             {loading && <Loader />}
             <section className='w-full h-auto'>
                 <div className='max-[1320px] w-full mx-auto flex justify-center gap-[40px] items-center h-[600px]'>
-                    <div className='login w-[full]'>
-                        <img src={LoginImg} alt="LoginImg" className='w-[400px] object-cover' />
-                    </div>
-                    <form className="w-full flex justify-center items-center flex-col max-w-[450px]" onSubmit={signIn}>
-                        <h2 className="lg:mb-[55px] relative text-center capitalize text-[2rem]">Daxil ol</h2>
+                    <form className="w-full flex mx-auto justify-center items-center flex-col max-w-[450px] bg-white rounded-lg p-7" onSubmit={signIn}>
+                        <h2 className="lg:mb-[55px] relative text-center capitalize text-[2rem] text-[#0B1739] font-bold ">Login</h2>
                         <div className="w-[40px]  h-[5px] rounded-lg bg-[#106853] block lg:hidden mt-[10px]"></div>
                         <div className="flex flex-row gap-[20px] w-full mt-[40px] lg:mt-[0]">
                             <div className="w-[100%] flex items-center justify-center flex-col">
                                 <div className="w-[100%] mb-[25px]">
                                     <input
                                         type="email"
-                                        className="block w-[100%] p-2 text-base font-normal leading-6 text-gray-700 bg-white border border-gray-300 appearance-none rounded-md px-[12px] py-[16px]"
-                                        placeholder="E-poçt ünvanı *"
+                                        className="block w-[100%] p-2 text-base font-normal leading-6 text-gray-700 bg-white border border-[#0B1739] appearance-none rounded-md px-[12px] py-[16px]"
+                                        placeholder="Email adress *"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
@@ -69,8 +65,8 @@ const Login = () => {
                                 <div className="w-[100%] mb-[25px]">
                                     <input
                                         type="password"
-                                        className="block w-full p-2 text-base font-normal leading-6 text-gray-700 bg-white border border-gray-300 appearance-none rounded-md px-[12px] py-[16px]"
-                                        placeholder="Şifrə *"
+                                        className="block w-full p-2 text-base font-normal leading-6 text-gray-700 bg-white border border-[#0B1739] appearance-none rounded-md px-[12px] py-[16px]"
+                                        placeholder="Password*"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
@@ -78,24 +74,17 @@ const Login = () => {
                             </div>
                         </div>
                         <div className='flex items-center lg:justify-between justify-center flex-col lg:flex-row max-w-[600px] w-full'>
-                            <Link to='/reset' className='text-[#106853]'>Şifrəmi unutdum</Link>
+                            <Link to='/reset' className='text-[#0B1739]'>Forgot your password</Link>
                         </div>
                         <button
                             type='submit'
-                            className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853]"
+                            className="mt-[30px] bg-gradient-to-r from-[#cb3cff] to-[#7f25fb] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold  transition-all"
                         >
-                            Daxil ol
+                            Login
                         </button>
-                        {/* <button
-                            type='button'
-                            className="mt-[30px] bg-[#fc8410] text-[#fff] px-[20px] py-[15px] w-full max-w-[240px] rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold hover:bg-[#106853]"
-                            onClick={() => { }}
-                        >
-                            Google
-                        </button> */}
                         <div className='flex items-center justify-center flex-col lg:flex-row max-w-[600px] w-full'>
-                            <span>Hesabınız yoxdur?</span>
-                            <Link to='/register' className='text-[#106853]'>Qeydiyyat</Link>
+                            <span>Don't have an account yet?</span>
+                            <Link to='/register' className='text-[#0B1739]'>Sign up</Link>
                         </div>
                     </form>
                 </div>
