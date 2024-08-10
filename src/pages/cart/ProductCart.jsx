@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../redux/slice/cartSlice';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ProductCart = ({ item }) => {
   const dispatch = useDispatch();
 
   const addToCart = () => {
+    toast.success('Add basket')
     dispatch(cartActions.addItem({
       id: item.id,
       productName: item.title,
@@ -33,6 +35,7 @@ const ProductCart = ({ item }) => {
       <button className="max-w-[150px] py-[10px] px-[20px] font-medium text-[black] w-[100%] border-black border-[1px] rounded hover:bg-[#0B1739] hover:border-white hover:text-[white] transition ease-in-out duration-200" onClick={addToCart}>
         Add to cart
       </button>
+      <ToastContainer/>
     </div>
   );
 };

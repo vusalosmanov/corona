@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { addAdmin } from "./firebase/adminSetup";
 import Home from "./pages/home/Home";
-import Contact from "./pages/contact/Contact";
 import Header from "./components/header/Header";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -19,6 +18,7 @@ import Users from "./pages/admin/Users";
 import AddAdmin from "./pages/admin/AddAdmin";
 import Orders from "./pages/admin/Ordesr";
 import Invoice from "./pages/invoice/Invoice";
+import Error from "./pages/error/Error";
 
 function App() {
   useEffect(() => {
@@ -32,7 +32,6 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<Reset />} />
@@ -50,6 +49,7 @@ function App() {
           <Route path="/productcart" element={<ProductCart />} />
           <Route path="/shopcart" element={<ShopCart />} />
           <Route path="/invoice" element={<Invoice />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </div>
     </Router>

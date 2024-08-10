@@ -31,7 +31,6 @@ const Invoice = () => {
 
         const orderNumber = `#${Math.floor(Math.random() * 1000000)}`;
 
-        // Sipariş nesnesini oluştur
         const order = {
             date: currentDate,
             orderNumber: orderNumber,
@@ -45,13 +44,12 @@ const Invoice = () => {
             totalAmount: totalAmount
         };
 
-        console.log('Submitting Order:', order); // Sipariş verisini kontrol et
+        console.log('Submitting Order:', order); 
 
         try {
-            // Firebase Firestore'a siparişi ekleme
             await addDoc(collection(db, 'orders'), order);
             console.log('Order successfully added to Firebase!');
-            dispatch(addOrder(order)); // Redux store'a siparişi ekleme
+            dispatch(addOrder(order));
             dispatch(removeItem());
             toast.success('Order successfully submitted!');
             setFormData({

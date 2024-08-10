@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import { auth } from '../../firebase/config';
-import userIcon from '../../assets/image/iconss/user icon.jpg'; // Fayl adı boşluqsuz olmalıdır
+import userIcon from '../../assets/image/iconss/user icon.jpg';
 import useAuth from '../../customHooks/useAuth';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,9 +41,8 @@ const TopNav = () => {
     };
     const now = new Date();
 
-    // Extract day, month, and year
     const day = now.getDate();
-    const month = now.toLocaleString('default', { month: 'long' }); // e.g., "August"
+    const month = now.toLocaleString('default', { month: 'long' });
     const year = now.getFullYear();
 
     return (

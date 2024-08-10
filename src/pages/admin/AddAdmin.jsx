@@ -12,7 +12,7 @@ const AddAdmin = () => {
             const adminDocRef = doc(db, 'admins', email);
             await setDoc(adminDocRef, { email: email });
             alert('Admin added successfully!');
-            setEmail(''); // Clear input field after successful addition
+            setEmail('');
         } catch (error) {
             console.error('Error adding admin:', error);
         }

@@ -1,5 +1,6 @@
 import React from 'react';
 import LoaderImg from '../../assets/image/iconss/loader.gif';
+
 import ReactDOM from 'react-dom';
 
 const Loader = () => {

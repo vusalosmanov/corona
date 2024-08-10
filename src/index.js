@@ -4,9 +4,8 @@ import "./scss/app.scss";
 import App from "./App";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import { addAdmin } from "./firebase/adminSetup"; // Admin əlavə etmə funksiyasını import edin
+import { addAdmin } from "./firebase/adminSetup"; 
 
-// Mümkün olan admin e-poçtunu əlavə edin
 const adminEmail = "vusal.osmanov66@gmail.com";
 addAdmin(adminEmail);
 

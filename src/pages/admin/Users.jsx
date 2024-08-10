@@ -5,14 +5,14 @@ import { db } from '../../firebase/config';
 import { toast } from 'react-toastify';
 
 const Users = () => {
-    const { data: usersData, loading, refetch } = useGetData('users'); // Assuming refetch is available
+    const { data: usersData, loading, refetch } = useGetData('users');
 
     const deleteUser = async (id) => {
         try {
             console.log(`Attempting to delete user with ID: ${id}`);
             await deleteDoc(doc(db, 'users', id));
             toast.success("User deleted successfully!");
-            refetch(); // Refetch the data to update the list
+            refetch();
         } catch (error) {
             console.error("Error deleting user:", error);
             toast.error("Failed to delete user.");

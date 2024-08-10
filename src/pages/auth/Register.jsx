@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import RegisterImg from '../../assets/image/iconss/register.png';
 import { Link, useNavigate } from 'react-router-dom';
 import 'react-toastify/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,7 +7,6 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, storage, db } from '../../firebase/config';
 import Loader from '../../components/loader/loader';
-import Swal from 'sweetalert2';
 
 const Register = () => {
   const [username, setUserName] = useState('');

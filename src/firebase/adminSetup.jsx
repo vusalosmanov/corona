@@ -1,7 +1,6 @@
 import { doc, setDoc, getDocs, query, where, collection } from 'firebase/firestore';
-import { db } from './config'; // Firebase konfiqurasiya faylınızı daxil edin
+import { db } from './config';
 
-// Admin e-poçtunu qeyd edin
 const adminEmail = "vusal.osmanov66@gmail.com";
 
 // Admin kolleksiyasına admin əlavə edən funksiya

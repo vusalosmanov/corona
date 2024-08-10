@@ -89,7 +89,7 @@ const ShopCart = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className='max-w-[420px] w-full h-auto bg-[#f5f5f5] shadow-md p-4 sm:p-6 lg:ml-4 rounded-lg'>
+                    <div className='max-w-[420px] w-full h-[200px] bg-[#f5f5f5] shadow-md p-4 sm:p-6 lg:ml-4 rounded-lg'>
                         <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Order Summary</h2>
                         <div className="flex flex-col sm:flex-row justify-between items-center mb-4">
                             <span className="text-base sm:text-lg">Total Price:</span>
