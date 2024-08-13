@@ -19,7 +19,7 @@ const ShopCart = () => {
         if (isLoggedIn) {
             navigate('/invoice');
         } else {
-            navigate('/invoice')
+            navigate('/login')
         }
     };
     const formattedTotalAmount = new Intl.NumberFormat().format(totalAmount);

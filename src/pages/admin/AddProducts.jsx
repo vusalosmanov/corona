@@ -247,8 +247,9 @@ const AddProducts = () => {
           <div className="mb-4 col-span-2 flex justify-center">
             <button
               type="submit"
+              disabled
               className="mt-[10px] bg-gradient-to-r from-[#cb3cff] to-[#7f25fb] text-[#fff] px-[20px] py-[15px] w-full max-w-[280px]  rounded-[5px] flex flex-row justify-center items-center text-center text-[18px] font-bold  transition-all"
-              disabled={isLoading}
+              // disabled={isLoading}
             >
               {isLoading ? 'Adding Product...' : 'Add Product'}
             </button>

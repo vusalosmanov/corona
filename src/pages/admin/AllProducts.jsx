@@ -125,6 +125,7 @@ const AllProducts = () => {
                       </button>
                       <button
                         className="text-red-500 hover:text-red-700 transition-colors"
+                        disabled
                         onClick={() => {
                           deleteProduct(item.id);
                         }}
@@ -272,6 +273,7 @@ const AllProducts = () => {
               <div className="flex justify-end space-x-2 mt-4">
                 <button
                   type="submit"
+                  disabled
                   className="bg-[#0B1739] text-white px-4 py-2 rounded-md hover:bg-[#081028] transition-colors"
                 >
                   Submit

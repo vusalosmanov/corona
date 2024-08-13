@@ -46,8 +46,9 @@ const Users = () => {
                                     <td className="border-b px-4 py-2">{user.displayName}</td>
                                     <td className="border-b px-4 py-2">{user.email}</td>
                                     <td className="border-b px-4 py-2 text-center">
-                                        <button className="text-red-500 hover:text-red-700 transition-colors" onClick={() => {
+                                        <button disabled className="text-red-500 hover:text-red-700 transition-colors" onClick={() => {
                                             deleteUser(user.uid);
+                                            
                                         }}>
                                             <svg
                                                 className="w-5 h-5"

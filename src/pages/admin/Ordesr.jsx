@@ -116,105 +116,109 @@ const OrdersPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {filteredOrders.map((order) => (
-                        <React.Fragment key={order.id}>
-                            <tr className="bg-[#081028] font-medium text-white">
-                            <td className="py-4 px-6 text-center text-sm md:text-base">{order.orderNumber}</td>
-                            <td className="py-4 px-6 text-start text-sm md:text-base">
-                                    <div className="flex flex-col items-start">
-                                    <span className="block mb-1 font-medium">{order.name}</span>
-                                        <span className="block text-[#AEB9E1] text-[12px]">{order.email}</span>
-                                    </div>
+                        {filteredOrders.map((order) => (
+                            <React.Fragment key={order.id}>
+                                <tr className="bg-[#081028] font-medium text-white">
+                                    <td className="py-4 px-6 text-center text-sm md:text-base">{order.orderNumber}</td>
+                                    <td className="py-4 px-6 text-start text-sm md:text-base">
+                                        <div className="flex flex-col items-start">
+                                            <span className="block mb-1 font-medium">{order.name}</span>
+                                            <span className="block text-[#AEB9E1] text-[12px]">{order.email}</span>
+                                        </div>
                                     </td>
-                                <td className="py-4 px-6 text-center text-sm md:text-base">
-                                {editOrderId === order.id ? (
-                                    <input
-                                    type="date"
-                                    value={newDate}
-                                    onChange={(e) => setNewDate(e.target.value)}
-                                            className="bg-[#0B1739] p-2 text-white text-sm md:text-base"
-                                        />
-                                    ) : (
-                                        <span>{order.date}</span>
-                                        )}
-                                </td>
-                                <td className="py-4 px-6 text-center text-sm md:text-base">
-                                    {editOrderId === order.id ? (
-                                        <select
-                                            value={newStatus}
-                                            onChange={(e) => setNewStatus(e.target.value)}
-                                            className="bg-[#0B1739] p-2 text-sm md:text-base"
-                                        >
-                                            <option value="· Pending" className={getStatusColor('· Pending')}>· Pending</option>
-                                            <option value="· Delivered" className={getStatusColor('· Delivered')}>· Delivered</option>
-                                            <option value="· Canceled" className={getStatusColor('· Canceled')}>· Canceled</option>
-                                        </select>
-                                        ) : (
-                                        <span className={getStatusColor(order.status)}>{order.status}</span>
-                                        )}
-                                        </td>
-                                        <td className="py-4 px-6 text-center text-sm md:text-base">
+                                    <td className="py-4 px-6 text-center text-sm md:text-base">
                                         {editOrderId === order.id ? (
                                             <input
-                                            type="text"
-                                            value={newAddress}
-                                            onChange={(e) => setNewAddress(e.target.value)}
-                                            className="bg-[#0B1739] p-2 text-white text-sm md:text-base"
+                                                type="date"
+                                                value={newDate}
+                                                onChange={(e) => setNewDate(e.target.value)}
+                                                className="bg-[#0B1739] p-2 text-white text-sm md:text-base"
                                             />
-                                            ) : (
-                                                <span>{order.address}</span>
-                                                )}
-                                                </td>
-                                                <td className="py-4 px-6 text-center text-sm md:text-base">{order.totalAmount} $</td>
-                                                <td className="py-4 px-6 text-center text-sm md:text-base">
-                                                <span onClick={() => toggleAccordion(order.id)} className="cursor-pointer text-lg md:text-xl">
-                                                {expandedOrderId === order.id ? (
-                                                    <AiOutlineUp />
-                                                    ) : (
-                                                        <AiOutlineDown />
-                                                        )}
-                                                        </span>
-                                                        </td>
-                                                        <td className="py-4 px-6 text-center text-sm md:text-base">
-                                                        {editOrderId === order.id ? (
-                                                            <>
-                                            <button onClick={() => handleSaveClick(order.id)} className="text-blue-500 mr-2 text-sm md:text-base">
-                                                Save
-                                            </button>
-                                            <button onClick={() => setEditOrderId(null)} className="text-gray-500 text-sm md:text-base">
-                                                Cancel
-                                                </button>
-                                        </>
-                                    ) : (
-                                        <div className='flex justify-center gap-2'>
-                                        <AiOutlineEdit
-                                        onClick={() => handleEditClick(order.id, order.status, order.date, order.address)}
-                                        className="text-blue-500 cursor-pointer"
-                                        />
-                                        <AiOutlineDelete
-                                        onClick={() => handleDeleteClick(order.id)}
-                                        className="text-red-500 cursor-pointer"
-                                        />
-                                        </div>
+                                        ) : (
+                                            <span>{order.date}</span>
                                         )}
-                                </td>
+                                    </td>
+                                    <td className="py-4 px-6 text-center text-sm md:text-base">
+                                        {editOrderId === order.id ? (
+                                            <select
+                                                value={newStatus}
+                                                onChange={(e) => setNewStatus(e.target.value)}
+                                                className="bg-[#0B1739] p-2 text-sm md:text-base"
+                                            >
+                                                <option value="· Pending" className={getStatusColor('· Pending')}>· Pending</option>
+                                                <option value="· Delivered" className={getStatusColor('· Delivered')}>· Delivered</option>
+                                                <option value="· Canceled" className={getStatusColor('· Canceled')}>· Canceled</option>
+                                            </select>
+                                        ) : (
+                                            <span className={getStatusColor(order.status)}>{order.status}</span>
+                                        )}
+                                    </td>
+                                    <td className="py-4 px-6 text-center text-sm md:text-base">
+                                        {editOrderId === order.id ? (
+                                            <input
+                                                type="text"
+                                                value={newAddress}
+                                                onChange={(e) => setNewAddress(e.target.value)}
+                                                className="bg-[#0B1739] p-2 text-white text-sm md:text-base"
+                                            />
+                                        ) : (
+                                            <span>{order.address}</span>
+                                        )}
+                                    </td>
+                                    <td className="py-4 px-6 text-center text-sm md:text-base">{order.totalAmount} $</td>
+                                    <td className="py-4 px-6 text-center text-sm md:text-base">
+                                        <span onClick={() => toggleAccordion(order.id)} className="cursor-pointer text-lg md:text-xl">
+                                            {expandedOrderId === order.id ? (
+                                                <AiOutlineUp />
+                                            ) : (
+                                                <AiOutlineDown />
+                                            )}
+                                        </span>
+                                    </td>
+                                    <td className="py-4 px-6 text-center text-sm md:text-base">
+                                        {editOrderId === order.id ? (
+                                            <>
+                                                <button onClick={() => handleSaveClick(order.id)} disabled className="text-blue-500 mr-2 text-sm md:text-base">
+                                                    Save
+                                                </button>
+                                                <button onClick={() => setEditOrderId(null)} className="text-gray-500 text-sm md:text-base">
+                                                    Cancel
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <div className='flex justify-center gap-2'>
+                                                <AiOutlineEdit
+                                                    onClick={() => handleEditClick(order.id, order.status, order.date, order.address)}
+                                                    className="text-blue-500 cursor-pointer"
+                                                />
+                                                <button
+                                                    disabled
+                                                >
+                                                    <AiOutlineDelete
+                                                        onClick={() => handleDeleteClick(order.id)}
+                                                        className="text-red-500 cursor-pointer"
+                                                    />
+                                                </button>
+                                            </div>
+                                        )}
+                                    </td>
                                 </tr>
-                            {expandedOrderId === order.id && (
-                                <tr>
-                                    <td colSpan="8" className="py-4 px-6 text-white bg-[#0B1739] text-sm md:text-base">
-                                    <div>
-                                    {order.cartItems.map((item, index) => (
-                                        <div key={index} className="mb-2">
-                                                    <strong>{item.productName}</strong> - {item.quantity} x {item.price} USD
+                                {expandedOrderId === order.id && (
+                                    <tr>
+                                        <td colSpan="8" className="py-4 px-6 text-white bg-[#0B1739] text-sm md:text-base">
+                                            <div>
+                                                {order.cartItems.map((item, index) => (
+                                                    <div key={index} className="mb-2">
+                                                        <strong>{item.productName}</strong> - {item.quantity} x {item.price} USD
                                                     </div>
-                                                    ))}
-                                                    </div>
-                                                    </td>
-                                                    </tr>
-                                                    )}
-                                                    </React.Fragment>
-                                                    ))}
-                                                    </tbody>
+                                                ))}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </tbody>
                 </table>
             </div>
         </div>
