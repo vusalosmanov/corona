@@ -3,7 +3,6 @@ import { db } from './config';
 
 const adminEmail = "vusal.osmanov66@gmail.com";
 
-// Admin kolleksiyasına admin əlavə edən funksiya
 export const addAdmin = async (email) => {
     try {
         const adminDocRef = doc(db, 'admins', email);
@@ -36,4 +35,4 @@ export const addUser = async (email) => {
 
 // Admin e-poçtunu bir dəfə çağırın
 // Bu sətri istifadə etməyi düşünə bilərsiniz, admin yalnız bir dəfə əlavə olunur
-// addAdmin(adminEmail); 
+addAdmin(adminEmail); 

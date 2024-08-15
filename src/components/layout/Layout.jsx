@@ -25,7 +25,7 @@ function Layout({ children }) {
     return (
         <>
             <button
-                className='page-scroll-button d-none fixed bottom-4 right-4 p-3 bg-blue-500 text-white rounded-full shadow-lg cursor-pointer transition-opacity duration-300 opacity-0 hover:opacity-100'
+                className='page-scroll-button d-none fixed bottom-4 right-4 p-3 bg-blue-500 text-white rounded-full shadow-lg cursor-pointer transition-opacity duration-300'
                 onClick={() => window.scrollTo(0, 0)}
                 aria-label="Scroll to top"
             >
