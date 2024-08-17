@@ -46,7 +46,7 @@ const ShopCart = () => {
                             </thead>
                             <tbody>
                                 {cartItems.map((item, index) => (
-                                    <tr className="hover:bg-gray-100 font-medium text-white hover:text-[#252a39] border-b-2" key={index}>
+                                    <tr key={index} className="hover:bg-gray-100 font-medium text-white hover:text-[#252a39] border-b-2" >
                                         <td className="py-4 px-6 text-center">
                                             <img src={item.imgUrl} alt={item.productName} className="w-20 h-20 object-contain mx-auto" />
                                         </td>

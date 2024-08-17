@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config';
@@ -11,8 +11,16 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [loginSuccess, setLoginSuccess] = useState(false); // Yeni state
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loginSuccess) {
+            toast.success(email === "vusal.osmanov66@gmail.com" ? 'Login successful as Admin' : 'Login successful');
+            setLoginSuccess(false); // Toast tetiklendikten sonra durumu sıfırlayın
+        }
+    }, [loginSuccess, email]);
 
     const signIn = async (e) => {
         e.preventDefault();
@@ -28,17 +36,13 @@ const Login = () => {
             } else {
                 throw new Error('User credential is null or undefined');
             }
-            // If user is admin, navigate to admin dashboard
-            const isAdmin = email === "vusal.osmanov66@gmail.com";
 
             setLoading(false);
-            if (isAdmin) {
-                toast.success('Login successful as Admin');
-                navigate('/dashboard');
-            } else {
-                toast.success('Login successful');
-                navigate('/');
-            }
+            const isAdmin = email === "vusal.osmanov66@gmail.com";
+
+            navigate(isAdmin ? '/dashboard' : '/');
+            setLoginSuccess(true); // Başarılı login durumunu ayarlayın
+
         } catch (error) {
             setLoading(false);
             toast.error(`Error: ${error.message}`);

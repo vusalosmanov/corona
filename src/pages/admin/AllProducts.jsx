@@ -28,7 +28,7 @@ const AllProducts = () => {
     toast.success('Deleted!');
   };
 
-  const toggleEditForm = (product) => {
+  const EditForm = (product) => {
     if (selectedProduct && selectedProduct.id === product.id) {
       setSelectedProduct(null);
     } else {
@@ -119,7 +119,7 @@ const AllProducts = () => {
                     <td className="border-b px-4 py-2 text-center">
                       <button
                         className="text-blue-500 hover:text-blue-700 transition-colors"
-                        onClick={() => toggleEditForm(item)}
+                        onClick={() => EditForm(item)}
                       >
                         <AiOutlineEdit className="w-5 h-5" />
                       </button>

@@ -13,7 +13,7 @@ const TopNav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
-    const toggleMenu = () => {
+    const Menu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
@@ -40,7 +40,6 @@ const TopNav = () => {
         });
     };
     const now = new Date();
-
     const day = now.getDate();
     const month = now.toLocaleString('default', { month: 'long' });
     const year = now.getFullYear();
@@ -58,7 +57,7 @@ const TopNav = () => {
                                 src={currentUser ? currentUser.photoURL : userIcon}
                                 alt="User Icon"
                                 className="w-10 h-10 rounded-full cursor-pointer border-2 border-white"
-                                onClick={toggleMenu}
+                                onClick={Menu}
                             />
                             {isMenuOpen && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">

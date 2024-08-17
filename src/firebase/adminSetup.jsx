@@ -7,7 +7,7 @@ export const addAdmin = async (email) => {
     try {
         const adminDocRef = doc(db, 'admins', email);
         await setDoc(adminDocRef, { email: email });
-        console.log(`Admin added: ${email}`);
+        // console.log(`Admin added: ${email}`);
     } catch (error) {
         console.error("Error adding admin: ", error);
     }
@@ -24,9 +24,9 @@ export const addUser = async (email) => {
             // Adminlər kolleksiyasında tapılmadısa, istifadəçilər kolleksiyasına əlavə edin
             const userDocRef = doc(db, 'users', email);
             await setDoc(userDocRef, { email: email });
-            console.log('User added: ' + email);
+            // console.log('User added: ' + email);
         } else {
-            console.log('User is an admin: ' + email);
+            // console.log('User is an admin: ' + email);
         }
     } catch (error) {
         console.error("Error adding user: ", error);
