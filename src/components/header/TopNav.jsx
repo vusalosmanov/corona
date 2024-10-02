@@ -33,7 +33,7 @@ const TopNav = () => {
 
     const logout = () => {
         signOut(auth).then(() => {
-            toast.success("Logout successfully.");
+            setIsMenuOpen(false)
             navigate("/");
         }).catch((error) => {
             toast.error(error.message);

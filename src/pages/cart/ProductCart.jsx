@@ -25,7 +25,7 @@ const ProductCart = ({ item }) => {
       <div className="w-[100%] flex justify-center items-center flex-col text-center mb-[20px]">
         <div className="min-h-[60px]  py-[0px] px-[10px] text-[#000]">
           <h3 className='font-bold'>
-            {item.title || 'Ürün Adı Mevcut Değil'}
+            {item.title}
           </h3>
         </div>
         <div className="flex justify-center items-center font-medium">
@@ -35,7 +35,7 @@ const ProductCart = ({ item }) => {
       <button className="max-w-[150px] py-[10px] px-[20px] font-medium text-[black] w-[100%] border-black border-[1px] rounded hover:bg-[#0B1739] hover:border-white hover:text-[white] transition ease-in-out duration-200" onClick={addToCart}>
         Add to cart
       </button>
-      <ToastContainer/>
+      <ToastContainer position='bottom-right'/>
     </div>
   );
 };
